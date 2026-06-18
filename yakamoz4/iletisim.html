@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İletişim & Ön Talep – Yakamoz 4 Butik</title>
+<meta name="description" content="Yakamoz 4 Butik projesi için ön talep formu. Karasu Aziziye kanal cepheli butik konut.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#1a4a2e;--green-mid:#2d6a45;--green-light:#e8f0eb;--green-accent:#3d8b5e;--white:#ffffff;--cream:#f9f7f4;--text:#1a1a1a;--text-muted:#5a6a5e;--border:#d4ddd6}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:46px;width:auto;display:block;border-radius:6px}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.875rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;padding:0.5rem 1.25rem;border-radius:6px;text-decoration:none;font-size:0.875rem;font-weight:500}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--green);border-radius:2px}
+
+.page-header{margin-top:64px;background:var(--green);padding:3.5rem 2rem;text-align:center}
+.page-header .tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.75rem}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;font-weight:400}
+
+.contact-section{padding:4rem 2rem}
+.container{max-width:1000px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
+
+.contact-info h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--green);margin-bottom:1rem;font-weight:400}
+.contact-info p{color:var(--text-muted);line-height:1.7;margin-bottom:2rem;font-size:0.95rem}
+.info-item{display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1.25rem}
+.info-icon{width:40px;height:40px;background:var(--green-light);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.info-text strong{display:block;font-size:0.875rem;font-weight:600;color:var(--green);margin-bottom:2px}
+.info-text span{font-size:0.875rem;color:var(--text-muted)}
+.info-text a{color:var(--green-accent);text-decoration:none}
+.info-text a:hover{text-decoration:underline}
+
+.wa-btn{
+  display:flex;align-items:center;gap:0.75rem;background:#25d366;color:#fff;
+  padding:0.875rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600;
+  font-size:0.95rem;margin-top:1.5rem;transition:background .2s;width:fit-content;
+}
+.wa-btn:hover{background:#1ebe5d}
+.wa-btn svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
+
+.form-card{background:var(--cream);border-radius:16px;padding:2.5rem;border:1px solid var(--border)}
+.form-card h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--green);margin-bottom:0.5rem;font-weight:400}
+.form-card p{color:var(--text-muted);font-size:0.875rem;margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:0.825rem;font-weight:600;color:var(--green);margin-bottom:0.4rem}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--text);background:#fff;
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--green-accent);box-shadow:0 0 0 3px rgba(61,139,94,0.12);
+}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-submit{
+  width:100%;padding:0.95rem;background:var(--green);color:#fff;border:none;
+  border-radius:8px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;
+  cursor:pointer;transition:background .2s;margin-top:0.5rem;
+}
+.form-submit:hover{background:var(--green-mid)}
+.form-note{font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;text-align:center}
+
+.success-msg{display:none;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:1.25rem;text-align:center;color:#2e7d32;font-weight:500;margin-top:1rem}
+
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:200;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform .2s}
+.whatsapp-float:hover{transform:scale(1.1)}
+.whatsapp-float svg{width:28px;height:28px;fill:#fff}
+
+footer{background:var(--green);color:rgba(255,255,255,0.7);padding:2.5rem 2rem;text-align:center}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:0.75rem;display:block}
+footer nav{position:static;background:transparent;border:none;padding:0;height:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem;margin-bottom:1.5rem}
+footer nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.85rem}
+footer p{font-size:0.78rem}
+
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .contact-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><img src="../logo.jpeg" alt="Özcan Yapı"></a>
+  <ul class="nav-links">
+    <li><a href="daireler.html">Daireler</a></li>
+    <li><a href="konum.html">Konum</a></li>
+    <li><a href="galeri.html">Galeri</a></li>
+    <li><a href="santiye.html">Şantiye</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <a class="nav-cta" href="iletisim.html">Ön Talep</a>
+  <button class="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <p class="tag">İletişim</p>
+  <h1>Ön Talep & Bilgi</h1>
+</div>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Bize Ulaşın</h2>
+        <p>Yakamoz 4 Butik hakkında detaylı bilgi almak, kat planlarını incelemek veya ön talep oluşturmak için formu doldurun ya da doğrudan WhatsApp'tan yazın.</p>
+
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div class="info-text">
+            <strong>Telefon / WhatsApp</strong>
+            <a href="tel:+905321589164">+90 532 158 91 64</a>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-text">
+            <strong>Proje Konumu</strong>
+            <span>Aziziye Mah., Karasu / Sakarya</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🏗️</div>
+          <div class="info-text">
+            <strong>Müteahhit</strong>
+            <span>Özcan Yapı</span>
+          </div>
+        </div>
+
+        <a class="wa-btn" href="https://wa.me/905321589164?text=Yakamoz%204%20Butik%20projesi%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.572a.5.5 0 00.61.61l5.727-1.471A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.072-1.386l-.363-.215-3.764.967.984-3.654-.236-.376A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          WhatsApp'tan Yaz
+        </a>
+      </div>
+
+      <div class="form-card">
+        <h2>Ön Talep Formu</h2>
+        <p>Ücretsiz ve bağlayıcı değildir. En kısa sürede sizi arayacağız.</p>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ad">Ad *</label>
+              <input type="text" id="ad" name="ad" placeholder="Adınız" required>
+            </div>
+            <div class="form-group">
+              <label for="soyad">Soyad *</label>
+              <input type="text" id="soyad" name="soyad" placeholder="Soyadınız" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="telefon">Telefon *</label>
+            <input type="tel" id="telefon" name="telefon" placeholder="0532 xxx xx xx" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-posta</label>
+            <input type="email" id="email" name="email" placeholder="ornek@email.com">
+          </div>
+          <div class="form-group">
+            <label for="daire">İlgilendiğiniz Daire Tipi</label>
+            <select id="daire" name="daire">
+              <option value="">Seçiniz</option>
+              <option value="bahceli">Bahçeli Daire (55m² + 20m² bahçe)</option>
+              <option value="standart">Standart Daire (55m²)</option>
+              <option value="terasli">Teraslı Daire (55m² + teras)</option>
+              <option value="kararmedim">Henüz karar vermedim</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="amac">Kullanım Amacı</label>
+            <select id="amac" name="amac">
+              <option value="">Seçiniz</option>
+              <option value="yazlik">Yazlık / Tatil</option>
+              <option value="kalici">Kalıcı Oturum</option>
+              <option value="yatirim">Yatırım / Kiralık</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mesaj">Mesajınız</label>
+            <textarea id="mesaj" name="mesaj" placeholder="Soru, istek veya notlarınız..."></textarea>
+          </div>
+          <button class="form-submit" type="submit">Ön Talep Gönder</button>
+          <p class="form-note">Bilgileriniz yalnızca sizinle iletişim kurmak için kullanılır.</p>
+        </form>
+        <div class="success-msg" id="successMsg">
+          ✅ Talebiniz alındı! En kısa sürede sizi arayacağız.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:0.75rem"><span style="font-family:Playfair Display,serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block">KARASU</span><span style="font-family:Playfair Display,serif;font-size:1.4rem;color:#fff;font-weight:600;letter-spacing:0.05em">ÖZCAN YAPI</span></div>
+  <nav>
+    <a href="daireler.html">Daireler</a>
+    <a href="konum.html">Konum</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="santiye.html">Şantiye</a>
+    <a href="iletisim.html">İletişim</a>
+  </nav>
+  <p>© 2025 Özcan Yapı · Aziziye Mah., Karasu / Sakarya</p>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/905321589164?text=Yakamoz%204%20Butik%20projesi%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.572a.5.5 0 00.61.61l5.727-1.471A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.072-1.386l-.363-.215-3.764.967.984-3.654-.236-.376A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const ad = document.getElementById('ad').value;
+  const soyad = document.getElementById('soyad').value;
+  const telefon = document.getElementById('telefon').value;
+  const daire = document.getElementById('daire').options[document.getElementById('daire').selectedIndex].text;
+  const amac = document.getElementById('amac').options[document.getElementById('amac').selectedIndex].text;
+  const mesaj = document.getElementById('mesaj').value;
+  const text = `Yakamoz 4 Butik - Ön Talep\n\nAd Soyad: ${ad} ${soyad}\nTelefon: ${telefon}\nDaire Tipi: ${daire}\nKullanım Amacı: ${amac}\nMesaj: ${mesaj}`;
+  window.open('https://wa.me/905321589164?text=' + encodeURIComponent(text), '_blank');
+  document.getElementById('successMsg').style.display = 'block';
+  this.reset();
+});
+</script>
+
+</body>
+</html>

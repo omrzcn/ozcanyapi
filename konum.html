@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konum – Yakamoz 4 Butik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#1a4a2e;--green-mid:#2d6a45;--green-light:#e8f0eb;--green-accent:#3d8b5e;--white:#ffffff;--cream:#f9f7f4;--text:#1a1a1a;--text-muted:#5a6a5e;--border:#d4ddd6}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:46px;width:auto;display:block;border-radius:6px}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.875rem;font-weight:500}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;padding:0.5rem 1.25rem;border-radius:6px;text-decoration:none;font-size:0.875rem;font-weight:500}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--green);border-radius:2px}
+.page-header{margin-top:64px;background:var(--green);padding:3.5rem 2rem;text-align:center}
+.page-header .tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.75rem}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;font-weight:400}
+.container{max-width:1000px;margin:0 auto}
+section{padding:4rem 2rem}
+.map-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:3rem;height:420px}
+.map-wrap iframe{width:100%;height:100%;border:none}
+.poi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
+.poi-card{background:var(--cream);border-radius:10px;padding:1.25rem;border:1px solid var(--border)}
+.poi-card .icon{font-size:1.5rem;margin-bottom:0.5rem}
+.poi-card h3{font-size:0.9rem;font-weight:600;color:var(--green);margin-bottom:0.3rem}
+.poi-card .dist{font-size:0.8rem;color:var(--green-accent);font-weight:600}
+.poi-card p{font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--green);margin-bottom:1rem}
+.section-tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-accent);font-weight:600;margin-bottom:0.75rem}
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:200;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform .2s}
+.whatsapp-float:hover{transform:scale(1.1)}
+.whatsapp-float svg{width:28px;height:28px;fill:#fff}
+footer{background:var(--green);color:rgba(255,255,255,0.7);padding:2.5rem 2rem;text-align:center}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:0.75rem;display:block}
+footer nav{position:static;background:transparent;border:none;padding:0;height:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem;margin-bottom:1.5rem}
+footer nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.85rem}
+footer p{font-size:0.78rem}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.map-wrap{height:280px}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><img src="logo.jpeg" alt="Özcan Yapı"></a>
+  <ul class="nav-links">
+    <li><a href="daireler.html">Daireler</a></li>
+    <li><a href="konum.html">Konum</a></li>
+    <li><a href="galeri.html">Galeri</a></li>
+    <li><a href="santiye.html">Şantiye</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <a class="nav-cta" href="iletisim.html">Ön Talep</a>
+  <button class="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="page-header">
+  <p class="tag">Konum</p>
+  <h1>Aziziye Mahallesi, Karasu</h1>
+</div>
+<section>
+  <div class="container">
+    <p class="section-tag">Harita</p>
+    <h2 class="section-title">Denize 1 km, Markete 2 Dakika</h2>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps?q=41.09275,30.71197&z=17&output=embed"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p class="section-tag">Yakın Çevre</p>
+    <h2 class="section-title">Her Şey Yakında</h2>
+    <div class="poi-grid">
+      <div class="poi-card"><div class="icon">🌊</div><h3>Karadeniz Sahili</h3><div class="dist">~1 km</div><p>Yürüyerek yaklaşık 12 dakika</p></div>
+      <div class="poi-card"><div class="icon">🛒</div><h3>Migros</h3><div class="dist">Yürüme mesafesi</div><p>Günlük alışveriş için ideal</p></div>
+      <div class="poi-card"><div class="icon">🛒</div><h3>Carrefour</h3><div class="dist">Yürüme mesafesi</div><p>Geniş ürün yelpazesi</p></div>
+      <div class="poi-card"><div class="icon">⛽</div><h3>Petrol Ofisi</h3><div class="dist">Yürüme mesafesi</div><p>Market ve market ürünleri</p></div>
+      <div class="poi-card"><div class="icon">⚖️</div><h3>Adalet Sarayı</h3><div class="dist">Yürüme mesafesi</div><p>Resmi işlemler için kolay erişim</p></div>
+      <div class="poi-card"><div class="icon">🛍️</div><h3>File Market</h3><div class="dist">Yürüme mesafesi</div><p>Mahalle marketi</p></div>
+      <div class="poi-card"><div class="icon">🌿</div><h3>Kanal</h3><div class="dist">Doğrudan cephe</div><p>Önü kapanmaz kanal manzarası</p></div>
+      <div class="poi-card"><div class="icon">🏥</div><h3>Sağlık Hizmetleri</h3><div class="dist">Yakın çevrede</div><p>Eczane, klinik, hastane</p></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div style="margin-bottom:0.75rem"><span style="font-family:Playfair Display,serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block">KARASU</span><span style="font-family:Playfair Display,serif;font-size:1.4rem;color:#fff;font-weight:600;letter-spacing:0.05em">ÖZCAN YAPI</span></div>
+  <nav><a href="daireler.html">Daireler</a><a href="konum.html">Konum</a><a href="galeri.html">Galeri</a><a href="santiye.html">Şantiye</a><a href="iletisim.html">İletişim</a></nav>
+  <p>© 2025 Özcan Yapı · Aziziye Mah., Karasu / Sakarya</p>
+</footer>
+<a class="whatsapp-float" href="https://wa.me/905321589164" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.572a.5.5 0 00.61.61l5.727-1.471A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.072-1.386l-.363-.215-3.764.967.984-3.654-.236-.376A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+</body>
+</html>

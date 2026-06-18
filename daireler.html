@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daire Tipleri – Yakamoz 4 Butik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#1a4a2e;--green-mid:#2d6a45;--green-light:#e8f0eb;--green-accent:#3d8b5e;--white:#ffffff;--cream:#f9f7f4;--text:#1a1a1a;--text-muted:#5a6a5e;--border:#d4ddd6}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:46px;width:auto;display:block;border-radius:6px}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.875rem;font-weight:500;transition:color .2s}
+.nav-links a:hover,nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;padding:0.5rem 1.25rem;border-radius:6px;text-decoration:none;font-size:0.875rem;font-weight:500}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--green);border-radius:2px}
+.page-header{margin-top:64px;background:var(--green);padding:3.5rem 2rem;text-align:center}
+.page-header .tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.75rem}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;font-weight:400}
+.container{max-width:1000px;margin:0 auto}
+section{padding:4rem 2rem}
+.section-tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-accent);font-weight:600;margin-bottom:0.75rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--green);margin-bottom:1rem}
+
+.apt-detail{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:3rem 0;border-bottom:1px solid var(--border)}
+.apt-detail:last-child{border-bottom:none}
+.apt-detail.reverse{direction:rtl}
+.apt-detail.reverse>*{direction:ltr}
+.apt-visual{border-radius:16px;height:280px;display:flex;align-items:center;justify-content:center;font-size:4rem;flex-direction:column;gap:1rem}
+.apt-visual.bahce{background:linear-gradient(135deg,#c8e6c9,#a5d6a7)}
+.apt-visual.standart{background:linear-gradient(135deg,#b2dfdb,#80cbc4)}
+.apt-visual.teras{background:linear-gradient(135deg,#dcedc8,#c5e1a5)}
+.apt-info h2{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--green);margin-bottom:1rem;font-weight:400}
+.apt-info p{color:var(--text-muted);line-height:1.75;margin-bottom:1.25rem;font-size:0.95rem}
+.apt-specs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}
+.spec-tag{background:var(--green-light);color:var(--green);padding:0.35rem 0.85rem;border-radius:20px;font-size:0.8rem;font-weight:600}
+.apt-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.75rem}
+.apt-features li{display:flex;align-items:center;gap:0.6rem;font-size:0.875rem;color:var(--text-muted)}
+.apt-features li::before{content:'✓';color:var(--green-accent);font-weight:700;font-size:0.9rem}
+.btn-green{background:var(--green);color:#fff;padding:0.85rem 1.75rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;display:inline-block;transition:background .2s}
+.btn-green:hover{background:var(--green-mid)}
+
+.count-banner{background:var(--cream);border-radius:12px;padding:1.5rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;border:1px solid var(--border)}
+.count-item{text-align:center;flex:1;min-width:100px}
+.count-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--green);display:block;font-weight:600}
+.count-lbl{font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em}
+
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:200;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform .2s}
+.whatsapp-float:hover{transform:scale(1.1)}
+.whatsapp-float svg{width:28px;height:28px;fill:#fff}
+footer{background:var(--green);color:rgba(255,255,255,0.7);padding:2.5rem 2rem;text-align:center}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:0.75rem;display:block}
+footer nav{position:static;background:transparent;border:none;padding:0;height:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem;margin-bottom:1.5rem}
+footer nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.85rem}
+footer p{font-size:0.78rem}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .apt-detail{grid-template-columns:1fr}
+  .apt-detail.reverse{direction:ltr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><img src="logo.jpeg" alt="Özcan Yapı"></a>
+  <ul class="nav-links">
+    <li><a href="daireler.html">Daireler</a></li>
+    <li><a href="konum.html">Konum</a></li>
+    <li><a href="galeri.html">Galeri</a></li>
+    <li><a href="santiye.html">Şantiye</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <a class="nav-cta" href="iletisim.html">Ön Talep</a>
+  <button class="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <p class="tag">Daire Tipleri</p>
+  <h1>Size Uygun Daireyi Seçin</h1>
+</div>
+
+<section>
+  <div class="container">
+    <div class="count-banner">
+      <div class="count-item"><span class="count-num">12</span><span class="count-lbl">Toplam Daire</span></div>
+      <div class="count-item"><span class="count-num">4</span><span class="count-lbl">Bahçeli Daire</span></div>
+      <div class="count-item"><span class="count-num">4</span><span class="count-lbl">Standart Daire</span></div>
+      <div class="count-item"><span class="count-num">4</span><span class="count-lbl">Teraslı Daire</span></div>
+      <div class="count-item"><span class="count-num">55 m²</span><span class="count-lbl">Net Alan (Hepsi)</span></div>
+    </div>
+
+    <div class="apt-detail">
+      <div class="apt-visual bahce">🌱<span style="font-size:0.9rem;color:#2e7d32;font-family:Inter,sans-serif;font-weight:600">Bahçeli Daire</span></div>
+      <div class="apt-info">
+        <h2>Bahçeli Daire</h2>
+        <p>Zemin katta yer alan 4 dairemizin her biri tamamen kendine özel 20 m² özel kullanım bahçesine sahip. Çocuklu aileler ve bahçe keyfi isteyenler için ideal.</p>
+        <div class="apt-specs">
+          <span class="spec-tag">55 m² Net</span>
+          <span class="spec-tag">+20 m² Özel Bahçe</span>
+          <span class="spec-tag">Zemin Kat</span>
+          <span class="spec-tag">4 Adet</span>
+        </div>
+        <ul class="apt-features">
+          <li>Tamamen özel, komşuyla paylaşılmayan bahçe</li>
+          <li>Bahçe kapısıyla doğrudan site içine erişim</li>
+          <li>Çocuklar için güvenli dış alan</li>
+          <li>Barbecue, oturma grubu kurulabilir alan</li>
+          <li>Kanal manzarasına yakın konum</li>
+        </ul>
+        <a class="btn-green" href="iletisim.html">Bu Daire İçin Ön Talep</a>
+      </div>
+    </div>
+
+    <div class="apt-detail reverse">
+      <div class="apt-visual standart">🏠<span style="font-size:0.9rem;color:#00695c;font-family:Inter,sans-serif;font-weight:600">Standart Daire</span></div>
+      <div class="apt-info">
+        <h2>Standart Daire</h2>
+        <p>Orta katta yer alan ferah ve işlevsel daireler. Kanal manzarasını en net şekilde gören katlar. Ulaşım kolaylığı ve optimum manzara dengesi.</p>
+        <div class="apt-specs">
+          <span class="spec-tag">55 m² Net</span>
+          <span class="spec-tag">Orta Kat</span>
+          <span class="spec-tag">Kanal Manzarası</span>
+        </div>
+        <ul class="apt-features">
+          <li>Net 55 m² kullanılabilir alan</li>
+          <li>Kanal cephesinde kesintisiz manzara</li>
+          <li>Asansör ile kolay erişim</li>
+          <li>Optimum hava sirkülasyonu</li>
+          <li>Havuz ve site sosyal alanlarına kolay erişim</li>
+        </ul>
+        <a class="btn-green" href="iletisim.html">Bu Daire İçin Ön Talep</a>
+      </div>
+    </div>
+
+    <div class="apt-detail">
+      <div class="apt-visual teras">☀️<span style="font-size:0.9rem;color:#558b2f;font-family:Inter,sans-serif;font-weight:600">Teraslı Daire</span></div>
+      <div class="apt-info">
+        <h2>Teraslı Daire</h2>
+        <p>Üst katta çatı yerine geniş teras. Kanal, deniz ve Karasu manzarasının en geniş açısı. Akşam serinlikleri ve sabah kahvesi için benzersiz bir alan.</p>
+        <div class="apt-specs">
+          <span class="spec-tag">55 m² Net</span>
+          <span class="spec-tag">Geniş Teras</span>
+          <span class="spec-tag">Üst Kat</span>
+          <span class="spec-tag">En Geniş Manzara</span>
+        </div>
+        <ul class="apt-features">
+          <li>Çatı yerine kullanılabilir geniş teras</li>
+          <li>360° manzara imkânı</li>
+          <li>Teras mobilyası, çiçek bahçesi kurulabilir</li>
+          <li>Tamamen özel, komşudan bağımsız alan</li>
+          <li>Yaz akşamları için ideal dış mekan</li>
+        </ul>
+        <a class="btn-green" href="iletisim.html">Bu Daire İçin Ön Talep</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- VAZİYET PLANI -->
+<section style="background:var(--cream)">
+  <div class="container">
+    <p class="section-tag">Vaziyet Planı</p>
+    <h2 class="section-title">Tip Kat Planı & Site Yerleşimi</h2>
+    <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.7;margin-bottom:2rem;max-width:600px">
+      842 m² toplam inşaat alanı üzerinde 12 daire, havuz ve peyzaj alanı. A ve B girişli iki blok, her katta 2 daire.
+    </p>
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#fff">
+      <img src="vaziyet-plani.jpeg" alt="Yakamoz 4 Butik Vaziyet Planı - Tip Kat Planı" 
+           style="width:100%;height:auto;display:block;">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1.5rem">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">🏊</div>
+        <div style="font-size:0.875rem;font-weight:600;color:var(--green)">Havuz</div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Sol parselde geniş yüzme havuzu</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">🚪</div>
+        <div style="font-size:0.875rem;font-weight:600;color:var(--green)">2 Giriş</div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">A Giriş ve B Giriş ayrı bloklar</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">🛏️</div>
+        <div style="font-size:0.875rem;font-weight:600;color:var(--green)">2+1 Daireler</div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Salon+mutfak, 2 yatak odası, WC</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem">🌿</div>
+        <div style="font-size:0.875rem;font-weight:600;color:var(--green)">Peyzaj</div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Çevre düzenlemesi ve yeşil alan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:0.75rem"><span style="font-family:Playfair Display,serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block">KARASU</span><span style="font-family:Playfair Display,serif;font-size:1.4rem;color:#fff;font-weight:600;letter-spacing:0.05em">ÖZCAN YAPI</span></div>
+  <nav>
+    <a href="daireler.html">Daireler</a>
+    <a href="konum.html">Konum</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="santiye.html">Şantiye</a>
+    <a href="iletisim.html">İletişim</a>
+  </nav>
+  <p>© 2025 Özcan Yapı · Aziziye Mah., Karasu / Sakarya</p>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/905321589164?text=Yakamoz%204%20Butik%20daire%20tipleri%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.572a.5.5 0 00.61.61l5.727-1.471A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.072-1.386l-.363-.215-3.764.967.984-3.654-.236-.376A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+</body>
+</html>

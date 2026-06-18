@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri – Yakamoz 4 Butik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#1a4a2e;--green-mid:#2d6a45;--green-light:#e8f0eb;--green-accent:#3d8b5e;--white:#ffffff;--cream:#f9f7f4;--text:#1a1a1a;--text-muted:#5a6a5e;--border:#d4ddd6}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:46px;width:auto;display:block;border-radius:6px}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.875rem;font-weight:500}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;padding:0.5rem 1.25rem;border-radius:6px;text-decoration:none;font-size:0.875rem;font-weight:500}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--green);border-radius:2px}
+.page-header{margin-top:64px;background:var(--green);padding:3.5rem 2rem;text-align:center}
+.page-header .tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.75rem}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;font-weight:400}
+.container{max-width:1100px;margin:0 auto}
+section{padding:4rem 2rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--green);margin-bottom:0.5rem}
+.section-tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-accent);font-weight:600;margin-bottom:0.75rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+.gallery-item{border-radius:12px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:2.5rem;flex-direction:column;gap:0.5rem;cursor:pointer;transition:transform .2s}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item span{font-size:0.75rem;font-weight:600;opacity:0.7;font-family:Inter,sans-serif}
+.g1{background:linear-gradient(135deg,#a5d6a7,#66bb6a)}
+.g2{background:linear-gradient(135deg,#80cbc4,#4db6ac)}
+.g3{background:linear-gradient(135deg,#c5e1a5,#9ccc65)}
+.g4{background:linear-gradient(135deg,#b2dfdb,#80cbc4)}
+.g5{background:linear-gradient(135deg,#dcedc8,#aed581)}
+.g6{background:linear-gradient(135deg,#a5d6a7,#81c784)}
+.placeholder-note{background:var(--cream);border:2px dashed var(--border);border-radius:12px;padding:2.5rem;text-align:center;color:var(--text-muted);margin-top:2rem}
+.placeholder-note h3{font-size:1rem;color:var(--green);margin-bottom:0.5rem;font-weight:600}
+.placeholder-note p{font-size:0.875rem;line-height:1.6}
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:200;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform .2s}
+.whatsapp-float:hover{transform:scale(1.1)}
+.whatsapp-float svg{width:28px;height:28px;fill:#fff}
+footer{background:var(--green);color:rgba(255,255,255,0.7);padding:2.5rem 2rem;text-align:center}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:0.75rem;display:block}
+footer nav{position:static;background:transparent;border:none;padding:0;height:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem;margin-bottom:1.5rem}
+footer nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.85rem}
+footer p{font-size:0.78rem}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.gallery-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><img src="../logo.jpeg" alt="Özcan Yapı"></a>
+  <ul class="nav-links">
+    <li><a href="daireler.html">Daireler</a></li>
+    <li><a href="konum.html">Konum</a></li>
+    <li><a href="galeri.html">Galeri</a></li>
+    <li><a href="santiye.html">Şantiye</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <a class="nav-cta" href="iletisim.html">Ön Talep</a>
+  <button class="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="page-header">
+  <p class="tag">Galeri</p>
+  <h1>Proje Görselleri</h1>
+</div>
+<section>
+  <div class="container">
+    <p class="section-tag">Render & Görseller</p>
+    <h2 class="section-title">Yakamoz 4 Butik</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item g1">🌊<span>Kanal Cephesi</span></div>
+      <div class="gallery-item g2">🏊<span>Havuz Alanı</span></div>
+      <div class="gallery-item g3">🌱<span>Bahçeli Daire</span></div>
+      <div class="gallery-item g4">☀️<span>Teras Görünümü</span></div>
+      <div class="gallery-item g5">🏠<span>Dış Cephe</span></div>
+      <div class="gallery-item g6">🌿<span>Peyzaj</span></div>
+    </div>
+    
+    <div style="margin-top:3rem">
+      <p class="section-tag" style="margin-bottom:0.75rem">Vaziyet & Kat Planı</p>
+      <h2 class="section-title">Site Yerleşim Planı</h2>
+      <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-top:1.5rem;background:#fff">
+        <img src="vaziyet-plani.jpeg" alt="Yakamoz 4 Butik - Tip Kat Planı ve Vaziyet" style="width:100%;height:auto;display:block;">
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.75rem;text-align:center">842 m² toplam inşaat alanı · Tip kat planı</p>
+    </div>
+
+    <div class="placeholder-note">
+      <h3>📸 Gerçek Fotoğraflar Yakında</h3>
+      <p>Proje renderleri ve şantiye fotoğrafları hazırlandıkça bu galeri güncellenecektir.<br>
+      Detaylı görseller için WhatsApp'tan ulaşabilirsiniz.</p>
+    </div>
+  </div>
+</section>
+<footer>
+  <div style="margin-bottom:0.75rem"><span style="font-family:Playfair Display,serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block">KARASU</span><span style="font-family:Playfair Display,serif;font-size:1.4rem;color:#fff;font-weight:600;letter-spacing:0.05em">ÖZCAN YAPI</span></div>
+  <nav><a href="daireler.html">Daireler</a><a href="konum.html">Konum</a><a href="galeri.html">Galeri</a><a href="santiye.html">Şantiye</a><a href="iletisim.html">İletişim</a></nav>
+  <p>© 2025 Özcan Yapı · Aziziye Mah., Karasu / Sakarya</p>
+</footer>
+<a class="whatsapp-float" href="https://wa.me/905321589164" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.572a.5.5 0 00.61.61l5.727-1.471A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.072-1.386l-.363-.215-3.764.967.984-3.654-.236-.376A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+</body>
+</html>

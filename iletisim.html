@@ -11,8 +11,11 @@
 :root{--black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;--dark3:#222;--gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6f32;--white:#fff;--text-muted:#888;--border:#2a2a2a;--border-light:#333}
 body{font-family:'Inter',sans-serif;color:var(--white);background:var(--black)}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:68px}
-.nav-brand{display:flex;align-items:center;text-decoration:none}
-.nav-brand img{height:46px;width:auto;display:block}
+.nav-brand{display:flex;align-items:center;text-decoration:none;gap:0.75rem}
+.brand-mark{width:36px;height:36px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--gold);flex-shrink:0}
+.brand-text{display:flex;flex-direction:column;gap:3px}
+.brand-name{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:600;color:var(--white);letter-spacing:0.1em;line-height:1}
+.brand-tag{font-size:0.48rem;letter-spacing:0.22em;color:var(--gold-dim);text-transform:uppercase}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
 .nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.825rem;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--white)}
@@ -65,7 +68,7 @@ footer nav a:hover{color:var(--gold)}
 </head>
 <body>
 <nav>
-  <a class="nav-brand" href="index.html"><img src="logo.jpeg" alt="Özcan Yapı"></a>
+  <a class="nav-brand" href="index.html"><div class="brand-mark">Ö</div><div class="brand-text"><span class="brand-name">ÖZCAN YAPI</span><span class="brand-tag">KARASU · EST. 2000</span></div></a>
   <ul class="nav-links">
     <li><a href="index.html#projeler">Projeler</a></li>
     <li><a href="hakkimizda.html">Hakkımızda</a></li>

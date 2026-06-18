@@ -24,11 +24,12 @@ nav{
   border-bottom:1px solid var(--border);
   padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:68px;
 }
-.nav-brand{display:flex;align-items:center;text-decoration:none;gap:0.75rem}
-.brand-mark{width:38px;height:38px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;font-weight:600;color:var(--black);flex-shrink:0}
-.brand-text{display:flex;flex-direction:column;gap:4px}
-.brand-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--white);letter-spacing:0.1em;line-height:1}
-.brand-tag{font-size:0.55rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase}
+.nav-brand{display:flex;align-items:center;text-decoration:none}
+.brand-logo{display:inline-flex;flex-direction:column;gap:5px}
+.brand-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--white);letter-spacing:0.14em;line-height:1}
+.brand-line{height:1px;background:var(--gold)}
+.brand-line--top{width:100%}
+.brand-line--bottom{width:52%;align-self:flex-end}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
 .nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.825rem;font-weight:500;letter-spacing:0.04em;transition:color .2s}
 .nav-links a:hover{color:var(--white)}
@@ -177,10 +178,10 @@ footer nav a:hover{color:var(--gold)}
 
 <nav>
   <a class="nav-brand" href="index.html">
-    <div class="brand-mark">Ö</div>
-    <div class="brand-text">
+    <div class="brand-logo">
+      <div class="brand-line brand-line--top"></div>
       <span class="brand-name">ÖZCAN YAPI</span>
-      <span class="brand-tag">KARASU · EST. 2000</span>
+      <div class="brand-line brand-line--bottom"></div>
     </div>
   </a>
   <ul class="nav-links">

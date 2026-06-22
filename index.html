@@ -162,11 +162,20 @@ footer nav a{color:var(--text-muted);text-decoration:none;font-size:0.825rem;tra
 footer nav a:hover{color:var(--gold)}
 .footer-bottom{font-size:0.75rem;color:#555;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
 
+.hamburger span{transition:transform .2s,opacity .2s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
 @media(max-width:900px){
   .nav-links,.nav-cta,.nav-lang{display:none}
   .hamburger{display:flex}
   .ap-inner{grid-template-columns:1fr}
   .hero-stat{padding:0 1.25rem}
+  nav.open{flex-wrap:wrap;height:auto;padding-bottom:1rem}
+  nav.open .nav-links{display:flex;flex-direction:column;gap:0;width:100%;order:3;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)}
+  nav.open .nav-links a{display:block;padding:0.8rem 0;border-bottom:1px solid var(--border);font-size:0.9rem;color:var(--white)}
+  nav.open .nav-cta{display:block;order:4;width:100%;text-align:center;margin-top:0.75rem;padding:0.75rem}
+  nav.open .nav-lang{display:flex;order:5;margin-top:0.5rem}
 }
 @media(max-width:480px){
   .hero-stats{gap:1rem}
@@ -367,7 +376,10 @@ footer nav a:hover{color:var(--gold)}
     <a href="iletisim.html" data-tr="İletişim" data-en="Contact">İletişim</a>
     <a href="yakamoz4/index.html">Yakamoz 4 Butik</a>
   </nav>
-  <div class="footer-bottom">© 2025 Özcan Yapı · Aziziye Mah., Karasu / Sakarya · <a href="tel:+905321589164" style="color:var(--gold-dim)">+90 532 158 91 64</a></div>
+  <div style="margin-bottom:1rem">
+    <a href="https://www.instagram.com/ozcanyapi" target="_blank" rel="noopener" style="color:var(--text-muted);font-size:0.825rem;text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Instagram → @ozcanyapi</a>
+  </div>
+  <div class="footer-bottom">© 2026 Özcan Yapı · Aziziye Mah., Karasu / Sakarya · <a href="tel:+905321589164" style="color:var(--gold-dim)">+90 532 158 91 64</a></div>
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/905321589164" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -382,6 +394,10 @@ function setLang(lang) {
   document.querySelectorAll('.nav-lang button').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
 }
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('nav').classList.toggle('open');
+  this.classList.toggle('active');
+});
 </script>
 </body>
 </html>

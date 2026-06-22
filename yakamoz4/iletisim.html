@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -86,11 +86,19 @@ footer nav{position:static;background:transparent;border:none;padding:0;height:a
 footer nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.85rem}
 footer p{font-size:0.78rem}
 
+.hamburger span{transition:transform .2s,opacity .2s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
 @media(max-width:768px){
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
   .contact-grid{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
+  nav.open{flex-wrap:wrap;height:auto;padding-bottom:1rem}
+  nav.open .nav-links{display:flex;flex-direction:column;gap:0;width:100%;order:3;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)}
+  nav.open .nav-links a{display:block;padding:0.8rem 0;border-bottom:1px solid var(--border);font-size:0.9rem;color:var(--text)}
+  nav.open .nav-cta{display:block;order:4;width:100%;text-align:center;margin-top:0.75rem;padding:0.75rem}
 }
 </style>
 </head>
@@ -237,5 +245,6 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 });
 </script>
 
+<script>document.querySelector('.hamburger').addEventListener('click',function(){document.querySelector('nav').classList.toggle('open');this.classList.toggle('active');});</script>
 </body>
 </html>

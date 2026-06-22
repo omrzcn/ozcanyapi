@@ -230,6 +230,9 @@ footer p{font-size:0.78rem}
 </a>
 
 <script>
+// ↓ Google Apps Script URL'sini buraya yapıştır
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz6vvqIC_jd07IlQ1W9StrlNdSHNsf4_5xkapWLY7kP7eyWUnPt_aTjcqat_aLFaMfQ/exec';
+
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const ad = document.getElementById('ad').value;
@@ -238,6 +241,17 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   const daire = document.getElementById('daire').options[document.getElementById('daire').selectedIndex].text;
   const amac = document.getElementById('amac').options[document.getElementById('amac').selectedIndex].text;
   const mesaj = document.getElementById('mesaj').value;
+
+  // Google Sheets'e kaydet
+  if (SHEET_URL !== 'BURAYA_APPS_SCRIPT_URL_YAPISTIR') {
+    fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: new URLSearchParams({ad, soyad, telefon, daire, amac, mesaj})
+    }).catch(() => {});
+  }
+
+  // WhatsApp'a yönlendir
   const text = `Yakamoz 4 Butik - Ön Talep\n\nAd Soyad: ${ad} ${soyad}\nTelefon: ${telefon}\nDaire Tipi: ${daire}\nKullanım Amacı: ${amac}\nMesaj: ${mesaj}`;
   window.open('https://wa.me/905321589164?text=' + encodeURIComponent(text), '_blank');
   document.getElementById('successMsg').style.display = 'block';

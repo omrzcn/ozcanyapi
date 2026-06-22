@@ -49,6 +49,15 @@ section{padding:4rem 2rem}
 .btn-green{background:var(--green);color:#fff;padding:0.85rem 1.75rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.9rem;display:inline-block;transition:background .2s}
 .btn-green:hover{background:var(--green-mid)}
 
+.price-banner{background:linear-gradient(135deg,#f0f7f2,#e4f0e8);border-bottom:1px solid var(--border);padding:2.5rem 2rem}
+.price-banner-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem}
+.price-badge{display:inline-block;background:var(--green);color:#fff;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.3rem 0.85rem;border-radius:20px;margin-bottom:0.75rem;font-weight:600}
+.price-main{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);color:var(--green);font-weight:600;line-height:1;margin-bottom:0.25rem}
+.price-label{font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem}
+.price-taksit{display:flex;align-items:center;gap:0.75rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:0.9rem 1.25rem;width:fit-content}
+.price-taksit .t-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--green);font-weight:600}
+.price-taksit .t-lbl{font-size:0.78rem;color:var(--text-muted);line-height:1.4}
+.price-taksit .t-divider{width:1px;height:36px;background:var(--border)}
 .count-banner{background:var(--cream);border-radius:12px;padding:1.5rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;border:1px solid var(--border)}
 .count-item{text-align:center;flex:1;min-width:100px}
 .count-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--green);display:block;font-weight:600}
@@ -71,6 +80,8 @@ footer p{font-size:0.78rem}
   .hamburger{display:flex}
   .apt-detail{grid-template-columns:1fr}
   .apt-detail.reverse{direction:ltr}
+  .price-banner-inner{grid-template-columns:1fr}
+  .price-banner-inner .btn-green{width:100%;text-align:center}
   nav.open{flex-wrap:wrap;height:auto;padding-bottom:1rem}
   nav.open .nav-links{display:flex;flex-direction:column;gap:0;width:100%;order:3;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)}
   nav.open .nav-links a{display:block;padding:0.8rem 0;border-bottom:1px solid var(--border);font-size:0.9rem;color:var(--text)}
@@ -95,6 +106,27 @@ footer p{font-size:0.78rem}
 <div class="page-header">
   <p class="tag">Daire Tipleri</p>
   <h1>Size Uygun Daireyi Seçin</h1>
+</div>
+
+<div class="price-banner">
+  <div class="price-banner-inner">
+    <div>
+      <span class="price-badge">Topraktan Satışa Özel Fiyat</span>
+      <div class="price-main">1.500.000 ₺</div>
+      <div class="price-label">Peşin satış fiyatı · Tüm daire tipleri için geçerlidir</div>
+      <div class="price-taksit">
+        <div>
+          <div class="t-num">24 Ay</div>
+          <div class="t-lbl">Taksit imkânı</div>
+        </div>
+        <div class="t-divider"></div>
+        <div>
+          <div class="t-lbl">Detaylı ödeme planı<br>için bizimle iletişime geçin</div>
+        </div>
+      </div>
+    </div>
+    <a class="btn-green" href="iletisim.html">Ön Talep & Fiyat Bilgisi</a>
+  </div>
 </div>
 
 <section>

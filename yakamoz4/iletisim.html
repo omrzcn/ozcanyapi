@@ -206,7 +206,7 @@ footer p{font-size:0.78rem}
           <p class="form-note">Bilgileriniz yalnızca sizinle iletişim kurmak için kullanılır.</p>
         </form>
         <div class="success-msg" id="successMsg">
-          ✅ Talebiniz alındı! En kısa sürede sizi arayacağız.
+          ✅ Talebiniz alınmıştır, teşekkür ederiz. En kısa sürede iletişime geçilecektir.
         </div>
       </div>
     </div>
@@ -242,20 +242,16 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   const amac = document.getElementById('amac').options[document.getElementById('amac').selectedIndex].text;
   const mesaj = document.getElementById('mesaj').value;
 
-  // Google Sheets'e kaydet
-  if (SHEET_URL !== 'BURAYA_APPS_SCRIPT_URL_YAPISTIR') {
-    fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: new URLSearchParams({ad, soyad, telefon, daire, amac, mesaj})
-    }).catch(() => {});
-  }
-
-  // WhatsApp'a yönlendir
-  const text = `Yakamoz 4 Butik - Ön Talep\n\nAd Soyad: ${ad} ${soyad}\nTelefon: ${telefon}\nDaire Tipi: ${daire}\nKullanım Amacı: ${amac}\nMesaj: ${mesaj}`;
-  window.open('https://wa.me/905321589164?text=' + encodeURIComponent(text), '_blank');
+  // Başarı mesajını hemen göster
   document.getElementById('successMsg').style.display = 'block';
   this.reset();
+
+  // Google Sheets'e arka planda kaydet
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: new URLSearchParams({ad, soyad, telefon, daire, amac, mesaj})
+  }).catch(() => {});
 });
 </script>
 

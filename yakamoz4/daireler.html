@@ -52,7 +52,8 @@ section{padding:4rem 2rem}
 .price-banner{background:linear-gradient(135deg,#f0f7f2,#e4f0e8);border-bottom:1px solid var(--border);padding:2.5rem 2rem}
 .price-banner-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem}
 .price-badge{display:inline-block;background:var(--green);color:#fff;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.3rem 0.85rem;border-radius:20px;margin-bottom:0.75rem;font-weight:600}
-.price-main{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);color:var(--green);font-weight:600;line-height:1;margin-bottom:0.25rem}
+.price-main{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:600;line-height:1;margin-bottom:0.25rem;background:linear-gradient(90deg,var(--green) 0%,#a8c4b0 30%,#e8e8e8 50%,#a8c4b0 70%,var(--green) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 2.5s linear infinite}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 .price-label{font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem}
 .price-taksit{display:flex;align-items:center;gap:0.75rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:0.9rem 1.25rem;width:fit-content}
 .price-taksit .t-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--green);font-weight:600}

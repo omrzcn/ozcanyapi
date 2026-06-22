@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yakamoz 4 Butik – Karasu'nun En Seçkin Konut Projesi</title>
-<meta name="description" content="Karasu Aziziye'de kanal cepheli, havuzlu, özel bahçeli ve teraslı butik konut projesi. Net 55 m² daireler, merkezi konum.">
+<meta name="description" content="Karasu Aziziye'de kanal cepheli, havuzlu, özel bahçeli ve teraslı butik konut projesi. Brüt 70 m² daireler, merkezi konum.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -16,12 +16,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white)}
-
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);
-  padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav-logo{display:flex;align-items:center;text-decoration:none}
 .brand-logo{display:inline-flex;flex-direction:column;gap:5px}
 .brand-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--text);letter-spacing:0.14em;line-height:1}
@@ -35,60 +30,32 @@ nav{
 .nav-cta:hover{background:var(--green-mid)}
 .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--green);border-radius:2px}
-
-.hero{
-  margin-top:64px;min-height:92vh;
-  background:linear-gradient(160deg,#1a4a2e 0%,#2d6a45 60%,#1a3a28 100%);
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:4rem 2rem;position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 40%);
-}
+.hero{margin-top:64px;min-height:92vh;background:linear-gradient(160deg,#1a4a2e 0%,#2d6a45 60%,#1a3a28 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(255,255,255,0.04) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,0.03) 0%,transparent 40%)}
 .hero-content{position:relative;max-width:680px}
-.hero-badge{
-  display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);
-  padding:0.35rem 1rem;border-radius:20px;font-size:0.72rem;letter-spacing:0.12em;
-  text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.2);
-}
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.4rem,5.5vw,3.8rem);
-  color:#fff;font-weight:400;line-height:1.2;margin-bottom:1rem;
-}
+.hero-badge{display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);padding:0.35rem 1rem;border-radius:20px;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.2)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5.5vw,3.8rem);color:#fff;font-weight:400;line-height:1.2;margin-bottom:1rem}
 .hero h1 em{font-style:italic;color:rgba(255,255,255,0.72)}
 .hero p{color:rgba(255,255,255,0.78);font-size:1.05rem;line-height:1.75;margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto}
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{
-  background:#fff;color:var(--green);padding:0.9rem 2rem;border-radius:6px;
-  text-decoration:none;font-weight:600;font-size:0.95rem;transition:transform .2s,box-shadow .2s;
-}
+.btn-primary{background:#fff;color:var(--green);padding:0.9rem 2rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.95rem;transition:transform .2s,box-shadow .2s}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.25)}
-.btn-outline{
-  background:transparent;color:#fff;padding:0.9rem 2rem;border-radius:6px;
-  text-decoration:none;font-weight:500;font-size:0.95rem;
-  border:1.5px solid rgba(255,255,255,0.35);transition:border-color .2s,background .2s;
-}
+.btn-outline{background:transparent;color:#fff;padding:0.9rem 2rem;border-radius:6px;text-decoration:none;font-weight:500;font-size:0.95rem;border:1.5px solid rgba(255,255,255,0.35);transition:border-color .2s,background .2s}
 .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08)}
 .hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-top:3rem;flex-wrap:wrap}
 .hero-stat{text-align:center}
 .hero-stat .num{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;font-weight:600;display:block}
 .hero-stat .lbl{font-size:0.75rem;color:rgba(255,255,255,0.6);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px}
-
 section{padding:5rem 2rem}
 .container{max-width:1100px;margin:0 auto}
 .section-tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-accent);font-weight:600;margin-bottom:0.75rem}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:400;line-height:1.3;color:var(--green);margin-bottom:1rem}
 .section-sub{font-size:1rem;color:var(--text-muted);line-height:1.7;max-width:560px}
-
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:3rem}
 .feature-card{background:var(--cream);border-radius:12px;padding:1.75rem;border:1px solid var(--border)}
 .feature-icon{width:44px;height:44px;background:var(--green-light);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.4rem}
 .feature-card h3{font-size:1rem;font-weight:600;color:var(--green);margin-bottom:0.5rem}
 .feature-card p{font-size:0.875rem;color:var(--text-muted);line-height:1.6}
-
 .apt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
 .apt-card{border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .apt-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem}
@@ -101,7 +68,6 @@ section{padding:5rem 2rem}
 .apt-tag{display:inline-block;background:var(--green-light);color:var(--green);padding:0.3rem 0.75rem;border-radius:20px;font-size:0.75rem;font-weight:600;margin-right:0.4rem;margin-bottom:0.4rem}
 .apt-link{display:inline-block;margin-top:0.75rem;color:var(--green-accent);font-size:0.875rem;font-weight:600;text-decoration:none}
 .apt-link:hover{text-decoration:underline}
-
 .location-sec{background:var(--green);color:#fff}
 .location-sec .section-tag{color:rgba(255,255,255,0.6)}
 .location-sec .section-title{color:#fff}
@@ -113,7 +79,6 @@ section{padding:5rem 2rem}
 .loc-list li strong{color:#fff}
 .map-placeholder{background:rgba(255,255,255,0.08);border-radius:12px;height:280px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.15)}
 .map-placeholder a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.9rem;text-align:center}
-
 .progress-sec{background:var(--cream)}
 .progress-steps{display:flex;gap:0;margin-top:3rem;flex-wrap:wrap}
 .p-step{flex:1;min-width:200px;padding:1.5rem;position:relative}
@@ -127,17 +92,9 @@ section{padding:5rem 2rem}
 .status-badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:20px;font-size:0.7rem;font-weight:600;margin-top:0.5rem}
 .status-aktif{background:#e8f5e9;color:#2e7d32}
 .status-bekle{background:var(--green-light);color:var(--green)}
-
-.whatsapp-float{
-  position:fixed;bottom:2rem;right:2rem;z-index:200;
-  width:56px;height:56px;border-radius:50%;background:#25d366;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;
-  transition:transform .2s,box-shadow .2s;
-}
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:200;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform .2s,box-shadow .2s}
 .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,0.5)}
 .whatsapp-float svg{width:28px;height:28px;fill:#fff}
-
 .cta-sec{text-align:center;background:var(--cream)}
 .cta-sec .section-title{margin-bottom:1rem}
 .cta-sec p{color:var(--text-muted);margin-bottom:2rem;font-size:1rem}
@@ -146,14 +103,11 @@ section{padding:5rem 2rem}
 .btn-green:hover{background:var(--green-mid)}
 .btn-wa{background:#25d366;color:#fff;padding:0.9rem 2rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.95rem;display:flex;align-items:center;gap:0.5rem;transition:background .2s}
 .btn-wa:hover{background:#1ebe5d}
-
 footer{background:var(--green);color:rgba(255,255,255,0.7);padding:3rem 2rem;text-align:center}
-footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:1rem;display:block}
 footer nav{position:static;background:transparent;border:none;padding:0;height:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-bottom:2rem}
 footer nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.875rem;transition:color .2s}
 footer nav a:hover{color:#fff}
 footer p{font-size:0.8rem}
-
 .hamburger span{transition:transform .2s,opacity .2s}
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
 .hamburger.active span:nth-child(2){opacity:0}
@@ -172,7 +126,6 @@ footer p{font-size:0.8rem}
 </style>
 </head>
 <body>
-
 <nav>
   <a class="nav-logo" href="../index.html"><div class="brand-logo"><div class="brand-line brand-line--top"></div><span class="brand-name">ÖZCAN YAPI</span><div class="brand-line brand-line--bottom"></div></div></a>
   <ul class="nav-links">
@@ -183,9 +136,7 @@ footer p{font-size:0.8rem}
     <li><a href="iletisim.html">İletişim</a></li>
   </ul>
   <a class="nav-cta" href="iletisim.html">Ön Talep</a>
-  <button class="hamburger" aria-label="Menü">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="hero">
@@ -199,14 +150,13 @@ footer p{font-size:0.8rem}
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><span class="num">12</span><span class="lbl">Daire</span></div>
-      <div class="hero-stat"><span class="num">55 m²</span><span class="lbl">Net Alan</span></div>
+      <div class="hero-stat"><span class="num">70 m²</span><span class="lbl">Brüt Alan</span></div>
       <div class="hero-stat"><span class="num">3</span><span class="lbl">Kat</span></div>
       <div class="hero-stat"><span class="num">1</span><span class="lbl">Havuz</span></div>
     </div>
   </div>
 </section>
 
-<!-- NEDEN BU PROJE -->
 <section>
   <div class="container">
     <p class="section-tag">Proje Avantajları</p>
@@ -231,12 +181,12 @@ footer p{font-size:0.8rem}
       <div class="feature-card">
         <div class="feature-icon">📍</div>
         <h3>Merkezi Konum</h3>
-        <p>Migros, Carrefour, Adalet Sarayı yürüme mesafesinde. Denize 1 km.</p>
+        <p>Migros, Carrefour, Adalet Sarayı yürüme mesafesinde. Denize 800 m.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🏠</div>
-        <h3>Net 55 m²</h3>
-        <p>Brüt değil, net alan. Kullandığınız her metrekare gerçekten size ait.</p>
+        <div class="feature-icon">📐</div>
+        <h3>Brüt 70 m²</h3>
+        <p>Ferah ve işlevsel alan. Kanal cephesinde konforlu yaşam için tasarlandı.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🏗️</div>
@@ -247,7 +197,6 @@ footer p{font-size:0.8rem}
   </div>
 </section>
 
-<!-- DAİRE TİPLERİ ÖNIZLEME -->
 <section style="background:var(--cream)">
   <div class="container">
     <p class="section-tag">Daire Tipleri</p>
@@ -259,9 +208,9 @@ footer p{font-size:0.8rem}
         <div class="apt-body">
           <h3>Bahçeli Daire</h3>
           <p>Zemin katta yer alan 4 dairemizin her biri kendine özel 20 m² özel bahçeye sahip.</p>
-          <span class="apt-tag">55 m² net</span>
-          <span class="apt-tag">+20 m² bahçe</span>
-          <span class="apt-tag">4 adet</span>
+          <span class="apt-tag">70 m² Brüt</span>
+          <span class="apt-tag">+20 m² Bahçe</span>
+          <span class="apt-tag">4 Adet</span>
           <br>
           <a class="apt-link" href="daireler.html">Detayları gör →</a>
         </div>
@@ -269,21 +218,21 @@ footer p{font-size:0.8rem}
       <div class="apt-card">
         <div class="apt-img standart">🏠</div>
         <div class="apt-body">
-          <h3>Standart Daire</h3>
-          <p>Orta katta yer alan ferah daireler. Kanal manzarası eşliğinde konforlu bir yaşam.</p>
-          <span class="apt-tag">55 m² net</span>
-          <span class="apt-tag">Orta kat</span>
+          <h3>Teras Kullanımlı Daire</h3>
+          <p>Orta katta özel teras kullanımlı daireler. Kanal manzarası eşliğinde konforlu yaşam.</p>
+          <span class="apt-tag">70 m² Brüt</span>
+          <span class="apt-tag">Orta Kat</span>
           <a class="apt-link" href="daireler.html">Detayları gör →</a>
         </div>
       </div>
       <div class="apt-card">
         <div class="apt-img teras">☀️</div>
         <div class="apt-body">
-          <h3>Teraslı Daire</h3>
-          <p>Üst katta çatı yerine geniş teras. Kanal ve çevre manzarasının en güzel hali.</p>
-          <span class="apt-tag">55 m² net</span>
-          <span class="apt-tag">Geniş teras</span>
-          <span class="apt-tag">Üst kat</span>
+          <h3>Teras Kullanımlı Daire</h3>
+          <p>Son katta geniş özel teras. Kanal ve çevre manzarasının en güzel hali.</p>
+          <span class="apt-tag">70 m² Brüt</span>
+          <span class="apt-tag">Geniş Teras</span>
+          <span class="apt-tag">Son Kat</span>
           <br>
           <a class="apt-link" href="daireler.html">Detayları gör →</a>
         </div>
@@ -292,20 +241,19 @@ footer p{font-size:0.8rem}
   </div>
 </section>
 
-<!-- KONUM -->
 <section class="location-sec">
   <div class="container">
     <p class="section-tag">Konum</p>
-    <h2 class="section-title">Denize 1 km, Markete 2 Dakika</h2>
+    <h2 class="section-title">Denize 800 m, Markete 2 Dakika</h2>
     <p class="section-sub">Yazlık konforu ile şehir pratiğini bir arada yaşayın. Aziziye Mahallesi, Karasu'nun en merkezi noktalarından biri.</p>
     <div class="loc-grid">
       <ul class="loc-list">
-        <li><span class="dot"></span><div><strong>Karadeniz Sahili</strong> — 1 km (yürüyerek 12 dakika)</div></li>
-        <li><span class="dot"></span><div><strong>Migros & Carrefour</strong> — yürüme mesafesi</div></li>
-        <li><span class="dot"></span><div><strong>Petrol Ofisi</strong> — yürüme mesafesi</div></li>
-        <li><span class="dot"></span><div><strong>Adalet Sarayı</strong> — yürüme mesafesi</div></li>
-        <li><span class="dot"></span><div><strong>File Market</strong> — yürüme mesafesi</div></li>
-        <li><span class="dot"></span><div><strong>Önü Kapanmaz Kanal</strong> — doğrudan cephe</div></li>
+        <li><span class="dot"></span><div><strong>Karadeniz Sahili</strong> – 800 m (yürüyerek 10 dakika)</div></li>
+        <li><span class="dot"></span><div><strong>Migros & Carrefour</strong> – yürüme mesafesi</div></li>
+        <li><span class="dot"></span><div><strong>Petrol Ofisi</strong> – yürüme mesafesi</div></li>
+        <li><span class="dot"></span><div><strong>Adalet Sarayı</strong> – yürüme mesafesi</div></li>
+        <li><span class="dot"></span><div><strong>File Market</strong> – yürüme mesafesi</div></li>
+        <li><span class="dot"></span><div><strong>Önü Kapanmaz Kanal</strong> – doğrudan cephe</div></li>
       </ul>
       <div class="map-placeholder">
         <a href="konum.html">
@@ -316,7 +264,6 @@ footer p{font-size:0.8rem}
   </div>
 </section>
 
-<!-- ŞANTİYE İLERLEME -->
 <section class="progress-sec">
   <div class="container">
     <p class="section-tag">Şantiye Durumu</p>
@@ -360,7 +307,6 @@ footer p{font-size:0.8rem}
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-sec">
   <div class="container">
     <h2 class="section-title">Fırsatı Kaçırmayın</h2>
@@ -384,13 +330,12 @@ footer p{font-size:0.8rem}
     <a href="santiye.html">Şantiye</a>
     <a href="iletisim.html">İletişim</a>
   </nav>
-  <p>© 2025 Özcan Yapı · Aziziye Mah., Karasu / Sakarya</p>
+  <p>© 2026 Özcan Yapı · Aziziye Mah., Karasu / Sakarya</p>
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/905321589164?text=Yakamoz%204%20Butik%20projesi%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp ile iletişim">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.572a.5.5 0 00.61.61l5.727-1.471A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.072-1.386l-.363-.215-3.764.967.984-3.654-.236-.376A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
 </a>
-
 <script>document.querySelector('.hamburger').addEventListener('click',function(){document.querySelector('nav').classList.toggle('open');this.classList.toggle('active');});</script>
 </body>
 </html>

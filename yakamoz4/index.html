@@ -30,8 +30,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .nav-cta:hover{background:var(--green-mid)}
 .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--green);border-radius:2px}
-.hero{margin-top:64px;min-height:92vh;background:linear-gradient(160deg,#1a4a2e 0%,#2d6a45 60%,#1a3a28 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(255,255,255,0.04) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,0.03) 0%,transparent 40%)}
+.hero{margin-top:64px;min-height:92vh;background:url('yakamoz4-3.webp') center 55% / cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(170deg,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.38) 50%,rgba(0,0,0,0.62) 100%)}
 .hero-content{position:relative;max-width:680px}
 .hero-badge{display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);padding:0.35rem 1rem;border-radius:20px;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.2)}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5.5vw,3.8rem);color:#fff;font-weight:400;line-height:1.2;margin-bottom:1rem}
@@ -115,6 +115,7 @@ footer p{font-size:0.8rem}
 @media(max-width:768px){
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
+  .hero{background-position:30% center;min-height:100svh}
   .loc-grid{grid-template-columns:1fr}
   .progress-steps{flex-direction:column}
   .p-step::after{display:none}

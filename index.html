@@ -202,8 +202,8 @@ footer nav a:hover{color:var(--gold)}
   </ul>
   <div style="display:flex;align-items:center">
     <div class="nav-lang">
-      <button class="active" onclick="setLang('tr')">TR</button>
-      <button onclick="setLang('en')">EN</button>
+      <button class="active" onclick="setLang('tr', this)">TR</button>
+      <button onclick="setLang('en', this)">EN</button>
     </div>
     <a class="nav-cta" href="yakamoz4/iletisim.html" data-tr="Ön Talep" data-en="Pre-Register">Ön Talep</a>
   </div>
@@ -216,7 +216,7 @@ footer nav a:hover{color:var(--gold)}
     <div class="hero-eyebrow" data-tr="🏗️ Topraktan Satışlar Başladı · Yakamoz 4 Butik" data-en="🏗️ Pre-Sales Started · Yakamoz 4 Boutique">
       🏗️ Topraktan Satışlar Başladı · Yakamoz 4 Butik
     </div>
-    <h1>Modern ve <em>Butik</em><br>Yaşam Alanları</h1>
+    <h1 data-tr="Modern ve <em>Butik</em><br>Yaşam Alanları" data-en="Modern &amp; <em>Boutique</em><br>Living Spaces">Modern ve <em>Butik</em><br>Yaşam Alanları</h1>
     <p data-tr="Özgün tasarım, kalıcı kalite. Her projemizde yaşam alanını bir adım ileriye taşıyoruz." data-en="Distinctive design, lasting quality. With every project, we take living spaces one step further.">
       Özgün tasarım, kalıcı kalite. Her projemizde yaşam alanını bir adım ileriye taşıyoruz.
     </p>
@@ -379,12 +379,12 @@ footer nav a:hover{color:var(--gold)}
 </a>
 
 <script>
-function setLang(lang) {
+function setLang(lang, btn) {
   document.querySelectorAll('[data-tr]').forEach(el => {
-    el.textContent = el.getAttribute('data-' + lang);
+    el.innerHTML = el.getAttribute('data-' + lang);
   });
-  document.querySelectorAll('.nav-lang button').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('.nav-lang button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 }
 document.querySelector('.hamburger').addEventListener('click', function() {
   document.querySelector('nav').classList.toggle('open');

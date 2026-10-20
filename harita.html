@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rota Animasyonu</title>
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:#000;display:flex;justify-content:center;align-items:center;height:100vh;font-family:Inter,sans-serif;color:#fff}
+#frame{position:relative;height:100vh;aspect-ratio:9/16;max-width:100vw;overflow:hidden;background:#111}
+#map{position:absolute;inset:0}
+.mapboxgl-ctrl-logo,.mapboxgl-ctrl-attrib{opacity:.35}
+#vig{position:absolute;inset:0;pointer-events:none;background:linear-gradient(#000a,#0000 25%,#0000 55%,#000c)}
+.t{position:absolute;left:8%;right:8%;font-family:'Playfair Display',serif;color:#f1e6cf;opacity:0;transition:opacity .8s}
+.t em{color:#d9b56f}
+#top{top:12%;text-align:center;font-size:6rem}
+#bottom{bottom:12%;font-size:2.6rem;line-height:1.15}
+.lbl{background:#15130fdd;border:1px solid #d9b56f66;color:#f1e6cf;font-size:12px;padding:5px 9px;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity .6s}
+.lbl b{color:#d9b56f;margin-right:5px}
+#card{position:absolute;inset:0;background:#0b0a08f2;display:flex;flex-direction:column;justify-content:center;padding:0 9%;opacity:0;pointer-events:none;transition:opacity 1s;font-family:'Playfair Display',serif;gap:14px}
+#card small{font:600 11px Inter;letter-spacing:.25em;color:#d9b56f}
+#card h1{font-size:2.8rem;font-weight:500;color:#f1e6cf;line-height:1.1}
+#card h1 em{color:#d9b56f}
+#price{font-size:2.6rem;color:#d9b56f}
+#tel{font:400 14px Inter;color:#f1e6cf}
+#replay{position:fixed;right:12px;top:12px;z-index:9;background:#d9b56f;border:0;padding:8px 14px;border-radius:8px;font-weight:600}
+.dot{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #d9b56f;box-shadow:0 0 0 6px #d9b56f44}
+</style></head><body>
+<button id="replay">▶ Baştan oynat</button>
+<div id="frame"><div id="map"></div><div id="vig"></div>
+<div class="t" id="top"></div><div class="t" id="bottom"></div>
+<div id="card"></div></div>
+<script>
+// ===== AYARLAR: sadece burayı değiştir =====
+const CFG={
+  token:(()=>{let t=localStorage.getItem('mbt');if(!t){t=prompt('Mapbox public token (pk. ile başlar):')||'';localStorage.setItem('mbt',t.trim())}return t.trim()})(),
+  // [boylam, enlem]
+  proje:[30.711806,41.092944],   // Yakamoz 4
+  deniz:[30.717778,41.101056],   // Sahil
+  denizDk:4,                     // rota süresinden otomatik güncellenir
+  pois:[
+    {ad:'Migros',m:'480 m',pos:[30.711444,41.097222]},
+    {ad:'Carrefour · Köfteci Yusuf',m:'390 m',pos:[30.714722,41.095639]},
+    {ad:'Adalet Sarayı',m:'480 m',pos:[30.71575,41.096056]},
+    {ad:'KYK Yurdu',m:'290 m',pos:[30.715194,41.092667]}
+  ],
+  logo:'ÖZCAN YAPI',
+  kart:{konum:'KARASU · YAKAMOZ 4',baslik:'Yakamoz 4 <em>Butik</em>',fiyat:'FİYAT YAZ ₺',tel:'+90 5XX XXX XX XX'}
+};
+// ===========================================
+mapboxgl.accessToken=CFG.token;
+const $=id=>document.getElementById(id);
+const map=new mapboxgl.Map({container:'map',style:'mapbox://styles/mapbox/satellite-v9',center:CFG.proje,zoom:15.5,pitch:0,interactive:false,attributionControl:false});
+let line=[],cum=[],total=0,markers=[],timers=[],raf;
+const sleep=ms=>new Promise(r=>timers.push(setTimeout(r,ms)));
+const hav=(a,b)=>{const R=6371e3,t=Math.PI/180,dl=(b[1]-a[1])*t,dg=(b[0]-a[0])*t;const x=Math.sin(dl/2)**2+Math.cos(a[1]*t)*Math.cos(b[1]*t)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
+function at(p){const d=p*total;let i=cum.findIndex(c=>c>=d);if(i<1)return line[0];const f=(d-cum[i-1])/(cum[i]-cum[i-1]||1);return[line[i-1][0]+(line[i][0]-line[i-1][0])*f,line[i-1][1]+(line[i][1]-line[i-1][1])*f]}
+function mk(html,cls,pos,anchor){const e=document.createElement('div');e.className=cls;e.innerHTML=html;const m=new mapboxgl.Marker({element:e,anchor:anchor||'left',offset:anchor?[0,0]:[14,0]}).setLngLat(pos).addTo(map);markers.push(m);return e}
+function say(id,html,show){const e=$(id);if(html!=null)e.innerHTML=html;e.style.opacity=show?1:0}
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+
+map.on('load',async()=>{
+  map.setPaintProperty('satellite','raster-brightness-max',.45);
+  map.setPaintProperty('satellite','raster-saturation',-.35);
+  map.setPaintProperty('satellite','raster-contrast',.2);
+  const u=`https://api.mapbox.com/directions/v5/mapbox/driving/${CFG.proje};${CFG.deniz}?geometries=geojson&overview=full&access_token=${CFG.token}`;
+  const r=await (await fetch(u)).json();
+  line=r.routes[0].geometry.coordinates;cum=[0];
+  for(let i=1;i<line.length;i++)cum.push(cum[i-1]+hav(line[i-1],line[i]));
+  total=cum[cum.length-1];CFG.denizDk=Math.max(1,Math.round(r.routes[0].duration/60));
+  const geo={type:'Feature',geometry:{type:'LineString',coordinates:line}};
+  map.addSource('r',{type:'geojson',data:geo,lineMetrics:true});
+  const base={'line-cap':'round','line-join':'round'};
+  map.addLayer({id:'glow',type:'line',source:'r',layout:base,paint:{'line-color':'#d9b56f','line-width':14,'line-blur':10,'line-opacity':.5,'line-trim-offset':[0,1]}});
+  map.addLayer({id:'rl',type:'line',source:'r',layout:base,paint:{'line-color':'#e8c987','line-width':4,'line-trim-offset':[0,1]}});
+  play();
+});
+
+async function play(){
+  timers.forEach(clearTimeout);cancelAnimationFrame(raf);timers=[];
+  markers.forEach(m=>m.remove());markers=[];
+  ['top','bottom'].forEach(i=>say(i,null,0));$('card').style.opacity=0;
+  setTrim(0);
+  map.jumpTo({center:CFG.proje,zoom:16,pitch:35,bearing:0});
+  mk('<div class="dot"></div>','',CFG.proje,'center');
+  mk(`<b>KONUM</b>${CFG.kart.konum.split('·').pop().trim()}`,'lbl',CFG.proje).style.opacity=1;
+  await sleep(600);
+  say('top',`${CFG.denizDk}<span style="font-size:2rem"> dk</span>`,1);
+  await sleep(1200);
+  // rota çizilir (6 sn), kamera ucu takip eder
+  const D=6000,t0=performance.now();
+  await new Promise(done=>{(function f(){
+    const p=Math.min(1,(performance.now()-t0)/D),e=ease(p);
+    setTrim(e);
+    map.jumpTo({center:at(e),zoom:16-0.7*e,bearing:-15*e,pitch:35+15*e});
+    p<1?raf=requestAnimationFrame(f):done();})()});
+  mk(`<b>${CFG.denizDk} dk</b>Karasu Sahili`,'lbl',CFG.deniz).style.opacity=1;
+  say('top',null,0);
+  say('bottom',`Denize sadece<br><em>${CFG.denizDk} dakika</em>`,1);
+  await sleep(1500);
+  // çevre noktaları
+  const b=new mapboxgl.LngLatBounds(CFG.proje,CFG.proje);
+  [CFG.deniz,...CFG.pois.map(p=>p.pos)].forEach(p=>b.extend(p));
+  map.fitBounds(b,{padding:{top:200,bottom:300,left:50,right:50},duration:2000,pitch:25,bearing:0});
+  say('bottom',null,0);
+  await sleep(2200);
+  for(const p of CFG.pois){const e=mk(`<b>${p.m}</b>${p.ad}`,'lbl',p.pos);requestAnimationFrame(()=>e.style.opacity=1);await sleep(700)}
+  await sleep(1500);
+  // kapanış kartı
+  const k=CFG.kart;
+  $('card').innerHTML=`<small>${CFG.logo}</small><small>${k.konum}</small><h1>${k.baslik}</h1><div id="price">${k.fiyat}</div><div id="tel">${k.tel}</div>`;
+  $('card').style.opacity=1;
+}
+function setTrim(p){['glow','rl'].forEach(l=>map.setPaintProperty(l,'line-trim-offset',[p,1]))}
+$('replay').onclick=play;
+</script></body></html>

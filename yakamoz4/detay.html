@@ -843,6 +843,13 @@ $('upTour').onclick=()=>{mode='int';applyMode(false);goView('salon');};
 $('upViewS').onclick=()=>openView(selected,'S');
 $('upViewN').onclick=()=>openView(selected,'N');
 
+/* satış durumu durum.json'dan okunur; okunamazsa sayfadaki #state yedeği kalır */
+fetch('durum.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+  if(!d||!d.daireler)return;
+  UNITS.forEach(u=>{const x=d.daireler[u.id];if(x&&STATUS[x.durum])STATE.units[u.id]={status:x.durum,price:typeof x.fiyat==='string'?x.fiyat:''};});
+  paintUnits();renderPanel();
+}).catch(()=>{});
+
 /* republish: the page keeps its own source (minus this copy) and rebuilds itself with new state */
 const MARK_STATE='__STA'+'TE__',MARK_SRC='<!--'+'SRC-->';
 function pageSource(){

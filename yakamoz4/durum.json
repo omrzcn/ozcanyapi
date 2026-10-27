@@ -1,0 +1,17 @@
+{
+  "_aciklama": "Daire durumları. durum: satista (yeşil) | opsiyon (sarı) | satildi (kırmızı). fiyat boş kalırsa 'Bilgi için arayın' yazar.",
+  "daireler": {
+    "A1": { "durum": "satista", "fiyat": "" },
+    "A2": { "durum": "satista", "fiyat": "" },
+    "A3": { "durum": "satildi", "fiyat": "" },
+    "A4": { "durum": "satildi", "fiyat": "" },
+    "A5": { "durum": "satildi", "fiyat": "" },
+    "A6": { "durum": "satista", "fiyat": "" },
+    "B1": { "durum": "satista", "fiyat": "" },
+    "B2": { "durum": "satildi", "fiyat": "" },
+    "B3": { "durum": "satista", "fiyat": "" },
+    "B4": { "durum": "satista", "fiyat": "" },
+    "B5": { "durum": "satildi", "fiyat": "" },
+    "B6": { "durum": "opsiyon", "fiyat": "" }
+  }
+}

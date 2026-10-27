@@ -2,15 +2,15 @@
 <html lang="tr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rota Animasyonu</title>
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0}
 body{background:#000;display:flex;justify-content:center;align-items:center;height:100vh;font-family:Inter,sans-serif;color:#fff}
 #frame{position:relative;height:100vh;aspect-ratio:9/16;max-width:100vw;overflow:hidden;background:#111}
 #map{position:absolute;inset:0}
-.mapboxgl-ctrl-logo,.mapboxgl-ctrl-attrib{opacity:.35}
+#attr{position:absolute;left:8px;bottom:6px;font-size:9px;color:#fff;opacity:.45;z-index:4;pointer-events:none}
 #vig{position:absolute;inset:0;pointer-events:none;background:linear-gradient(#000a,#0000 25%,#0000 55%,#000c)}
 .t{position:absolute;left:8%;right:8%;font-family:'Playfair Display',serif;color:#f1e6cf;opacity:0;transition:opacity .8s}
 .t em{color:#d9b56f}
@@ -30,16 +30,17 @@ body{background:#000;display:flex;justify-content:center;align-items:center;heig
 <button id="replay">▶ Baştan oynat</button>
 <div id="frame"><div id="map"></div><div id="vig"></div>
 <div class="t" id="top"></div><div class="t" id="bottom"></div>
-<div id="card"></div><div id="load" style="position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;color:#d9b56f;font:600 14px Inter;letter-spacing:.2em;z-index:5">HARİTA YÜKLENİYOR…</div></div>
+<div id="card"></div><div id="attr">Görüntü © Esri, Maxar, Earthstar Geographics</div><div id="load" style="position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;color:#d9b56f;font:600 14px Inter;letter-spacing:.2em;z-index:5">HARİTA YÜKLENİYOR…</div></div>
 <script>
 // ===== AYARLAR: sadece burayı değiştir =====
 const CFG={
-  token:(()=>{const q=new URLSearchParams(location.search).get('t');if(q)localStorage.setItem('mbt',q.trim());let t=localStorage.getItem('mbt');if(!t){t=prompt('Mapbox public token (pk. ile başlar):')||'';localStorage.setItem('mbt',t.trim())}return t.trim()})(),
   // [boylam, enlem]
   proje:[30.711806,41.092944],   // Yakamoz 4
   deniz:[30.717778,41.101056],   // Sahil
   hiz:1,                         // 1 = toplam 17 sn. Büyütürsen hızlanır
   denizDk:3,
+  // Projeden sahile araç rotası (Mapbox Directions'tan bir kez alındı)
+  rota:[[30.712268,41.093686],[30.711918,41.09381],[30.710766,41.094227],[30.710063,41.09447],[30.709562,41.094659],[30.709326,41.094739],[30.709335,41.094748],[30.709346,41.094784],[30.709454,41.094867],[30.709544,41.094923],[30.70966,41.094985],[30.710048,41.095134],[30.71093,41.095468],[30.711585,41.095716],[30.712324,41.096004],[30.713082,41.096295],[30.7134,41.096415],[30.713543,41.096441],[30.713745,41.096421],[30.713948,41.096634],[30.714214,41.096876],[30.714777,41.097083],[30.714838,41.09712],[30.71489,41.097165],[30.715145,41.097503],[30.715249,41.097586],[30.715334,41.097622],[30.715417,41.09765],[30.71572,41.0977],[30.715993,41.097741],[30.716353,41.097778],[30.716462,41.0978],[30.716661,41.097851],[30.716802,41.09791],[30.716936,41.097954],[30.717009,41.097989],[30.717085,41.098042],[30.717162,41.098113],[30.71727,41.098189],[30.717327,41.098216],[30.717442,41.098259],[30.717556,41.098301],[30.717575,41.098301],[30.717623,41.09831],[30.717667,41.098327],[30.717705,41.09835],[30.717735,41.098378],[30.717756,41.098409],[30.717769,41.098443],[30.717772,41.098479],[30.717766,41.098514],[30.71775,41.098547],[30.717725,41.098577],[30.717693,41.098603],[30.717655,41.098624],[30.717611,41.098638],[30.717565,41.098645],[30.71755,41.098645],[30.717518,41.098645],[30.717324,41.098746],[30.717241,41.098797],[30.716714,41.099144],[30.71585,41.099743],[30.715795,41.099781],[30.716248,41.100387],[30.716398,41.100627],[30.716847,41.101319],[30.717536,41.101036],[30.717715,41.100966]],
   pois:[
     {ad:'Migros',m:'480 m',pos:[30.711444,41.097222]},
     {ad:'Carrefour · Köfteci Yusuf',m:'390 m',pos:[30.714722,41.095639]},
@@ -50,14 +51,13 @@ const CFG={
   kart:{konum:'KARASU · YAKAMOZ 4',baslik:'Yakamoz 4 <em>Butik</em>',fiyat:'Fiyat ve ödeme seçenekleri için iletişime geçin',tel:''}
 };
 // ===========================================
-mapboxgl.accessToken=CFG.token;
 const $=id=>document.getElementById(id);
-const map=new mapboxgl.Map({container:'map',style:'mapbox://styles/mapbox/satellite-v9',center:CFG.proje,zoom:15.5,pitch:0,interactive:false,attributionControl:false,fadeDuration:0,maxTileCacheSize:400});
+const map=new maplibregl.Map({container:'map',style:{version:8,sources:{sat:{type:'raster',tileSize:256,maxzoom:19,tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}']}},layers:[{id:'satellite',type:'raster',source:'sat'}]},center:CFG.proje,zoom:15.5,pitch:0,interactive:false,attributionControl:false,fadeDuration:0,maxTileCacheSize:400});
 let line=[],cum=[],total=0,markers=[],timers=[],raf;
 const sleep=ms=>new Promise(r=>timers.push(setTimeout(r,ms/CFG.hiz)));
 const hav=(a,b)=>{const R=6371e3,t=Math.PI/180,dl=(b[1]-a[1])*t,dg=(b[0]-a[0])*t;const x=Math.sin(dl/2)**2+Math.cos(a[1]*t)*Math.cos(b[1]*t)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
 function at(p){const d=p*total;let i=cum.findIndex(c=>c>=d);if(i<1)return line[0];const f=(d-cum[i-1])/(cum[i]-cum[i-1]||1);return[line[i-1][0]+(line[i][0]-line[i-1][0])*f,line[i-1][1]+(line[i][1]-line[i-1][1])*f]}
-function mk(html,cls,pos,anchor){const e=document.createElement('div');e.className=cls;e.innerHTML=html;const m=new mapboxgl.Marker({element:e,anchor:anchor||'left',offset:anchor?[0,0]:[14,0]}).setLngLat(pos).addTo(map);markers.push(m);return e}
+function mk(html,cls,pos,anchor){const e=document.createElement('div');e.className=cls;e.innerHTML=html;const m=new maplibregl.Marker({element:e,anchor:anchor||'left',offset:anchor?[0,0]:[14,0]}).setLngLat(pos).addTo(map);markers.push(m);return e}
 function say(id,html,show){const e=$(id);if(html!=null)e.innerHTML=html;e.style.opacity=show?1:0}
 const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 
@@ -65,16 +65,13 @@ map.on('load',async()=>{
   map.setPaintProperty('satellite','raster-brightness-max',.45);
   map.setPaintProperty('satellite','raster-saturation',-.35);
   map.setPaintProperty('satellite','raster-contrast',.2);
-  const u=`https://api.mapbox.com/directions/v5/mapbox/driving/${CFG.proje};${CFG.deniz}?geometries=geojson&overview=full&access_token=${CFG.token}`;
-  const r=await (await fetch(u)).json();
-  line=r.routes[0].geometry.coordinates;cum=[0];
+  line=CFG.rota;cum=[0];
   for(let i=1;i<line.length;i++)cum.push(cum[i-1]+hav(line[i-1],line[i]));
   total=cum[cum.length-1];
-  const geo={type:'Feature',geometry:{type:'LineString',coordinates:line}};
-  map.addSource('r',{type:'geojson',data:geo,lineMetrics:true});
+  map.addSource('r',{type:'geojson',data:part(0)});
   const base={'line-cap':'round','line-join':'round'};
-  map.addLayer({id:'glow',type:'line',source:'r',layout:base,paint:{'line-color':'#d9b56f','line-width':14,'line-blur':10,'line-opacity':.5,'line-trim-offset':[0,1]}});
-  map.addLayer({id:'rl',type:'line',source:'r',layout:base,paint:{'line-color':'#e8c987','line-width':4,'line-trim-offset':[0,1]}});
+  map.addLayer({id:'glow',type:'line',source:'r',layout:base,paint:{'line-color':'#d9b56f','line-width':14,'line-blur':10,'line-opacity':.5}});
+  map.addLayer({id:'rl',type:'line',source:'r',layout:base,paint:{'line-color':'#e8c987','line-width':4}});
   await preload();
   $('load').remove();
   play();
@@ -83,7 +80,7 @@ map.on('load',async()=>{
 async function preload(){
   const wait=()=>new Promise(r=>{let d=0;const f=()=>{if(!d){d=1;r()}};map.once('idle',f);setTimeout(f,3000)});
   for(let i=0;i<=12;i++){map.jumpTo({center:at(i/12),zoom:16,pitch:42,bearing:-8});await wait()}
-  const b=new mapboxgl.LngLatBounds(CFG.proje,CFG.proje);
+  const b=new maplibregl.LngLatBounds(CFG.proje,CFG.proje);
   [CFG.deniz,...CFG.pois.map(p=>p.pos)].forEach(p=>b.extend(p));
   map.fitBounds(b,{padding:{top:200,bottom:300,left:50,right:50},duration:0});await wait();
 }
@@ -110,7 +107,7 @@ async function play(){
   say('bottom',`Denize sadece<br><em>${CFG.denizDk} dakika</em>`,1);
   await sleep(1000);
   // çevre noktaları
-  const b=new mapboxgl.LngLatBounds(CFG.proje,CFG.proje);
+  const b=new maplibregl.LngLatBounds(CFG.proje,CFG.proje);
   [CFG.deniz,...CFG.pois.map(p=>p.pos)].forEach(p=>b.extend(p));
   map.fitBounds(b,{padding:{top:200,bottom:300,left:50,right:50},duration:1800/CFG.hiz,pitch:25,bearing:0});
   say('bottom',null,0);
@@ -122,6 +119,8 @@ async function play(){
   $('card').innerHTML=`<small>${CFG.logo}</small><small>${k.konum}</small><h1>${k.baslik}</h1><div id="price">${k.fiyat}</div><div id="tel">${k.tel}</div>`;
   $('card').style.opacity=1;
 }
-function setTrim(p){['glow','rl'].forEach(l=>map.setPaintProperty(l,'line-trim-offset',[p,1]))}
+// rotanın 0..p kısmını çiz
+function part(p){const d=p*total,c=line.filter((_,i)=>cum[i]<d);c.push(at(p));if(c.length<2)c.push(c[0]);return{type:'Feature',geometry:{type:'LineString',coordinates:c}}}
+function setTrim(p){map.getSource('r').setData(part(p))}
 $('replay').onclick=play;
 </script></body></html>
